@@ -1,7 +1,9 @@
-import { beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
+import { beforeSave, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
 import Hash from '@ioc:Adonis/Core/Hash';
 
-import BaseModel from './DefaultModel';
+import BaseModel from './DefaultModel/BaseModel';
+import { DateTime } from 'luxon';
+import Address from './Address';
 
 export default class User extends BaseModel {
   @column()
@@ -12,6 +14,15 @@ export default class User extends BaseModel {
 
   @column({ serializeAs: null })
   public password: string;
+
+  @column.dateTime({ columnName: 'deleted_at' })
+  public birth_date: DateTime;
+
+  @column()
+  public address_id: string;
+
+  @hasOne(() => Address)
+  public address: HasOne<typeof Address>;
 
   @beforeSave()
   public static async hashPassword(user: User) {
