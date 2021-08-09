@@ -49,16 +49,31 @@ export default class Validator {
         rulesArray.push(rules.unique({ table, column: attribute.name }));
       }
 
+      if (attribute.exists) {
+        rulesArray.push(
+          rules.exists({
+            table: attribute.exists.table,
+            column: attribute.exists.column || 'id',
+            where: { deleted_at: null, ...(attribute.exists.where || {}) },
+          }),
+        );
+      }
+
       if (attribute.required) {
+        console.log(rulesArray);
         entityObjectValidator[attribute.name] = schema[attribute.type](
           {},
           rulesArray,
         );
       } else {
-        entityObjectValidator[attribute.name] = schema[attribute.type].optional(
-          {},
-          rulesArray,
-        );
+        try {
+          entityObjectValidator[attribute.name] = schema[
+            attribute.type
+          ].optional({}, rulesArray);
+        } catch {
+          entityObjectValidator[attribute.name] =
+            schema[attribute.type].optional(rulesArray);
+        }
       }
     });
     const entitySchemaValidator = schema.create(entityObjectValidator);
@@ -84,10 +99,25 @@ export default class Validator {
         rulesArray.push(rules.unique({ table, column: attribute.name }));
       }
 
-      entityObjectValidator[attribute.name] = schema[attribute.type].optional(
-        {},
-        rulesArray,
-      );
+      if (attribute.exists) {
+        rulesArray.push(
+          rules.exists({
+            table: attribute.exists.table,
+            column: attribute.exists.column || 'id',
+            where: { deleted_at: null, ...(attribute.exists.where || {}) },
+          }),
+        );
+      }
+
+      try {
+        entityObjectValidator[attribute.name] = schema[attribute.type].optional(
+          {},
+          rulesArray,
+        );
+      } catch {
+        entityObjectValidator[attribute.name] =
+          schema[attribute.type].optional(rulesArray);
+      }
     });
 
     entityObjectValidator['id'] = schema.string({}, [

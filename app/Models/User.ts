@@ -15,7 +15,7 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password: string;
 
-  @column.dateTime({ columnName: 'deleted_at' })
+  @column.dateTime()
   public birth_date: DateTime;
 
   @column()

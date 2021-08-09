@@ -26,5 +26,8 @@ export default (): Array<MetaColumnValidation> => [
   {
     name: 'address_id',
     type: 'string',
+    exists: {
+      table: 'addresses',
+    },
   },
 ];
