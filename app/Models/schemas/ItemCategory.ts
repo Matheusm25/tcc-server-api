@@ -7,24 +7,8 @@ export default (): Array<MetaColumnValidation> => [
     type: 'string',
   },
   {
-    name: 'email',
+    name: 'truck_id',
     required: true,
-    type: 'string',
-    email: true,
-    unique: true,
-  },
-  {
-    name: 'password',
-    required: true,
-    type: 'string',
-  },
-  {
-    name: 'birth_date',
-    required: true,
-    type: 'date',
-  },
-  {
-    name: 'address_id',
     type: 'string',
   },
 ];

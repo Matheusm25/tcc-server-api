@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import DefaultModel from '../../Models/DefaultModel';
+import DefaultModel from '../../Models/DefaultModel/BaseModel';
 
 interface HttpContextContractWithModel extends HttpContextContract {
   Model: typeof DefaultModel;

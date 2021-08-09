@@ -11,7 +11,7 @@ export default class Validator {
   ) {
     const [action] = guards || [];
     const schema = (await import(`../Models/schemas/${Model.name}`)).default;
-    await this[action](schema, request, Model.table);
+    await this[action](schema(), request, Model.table);
     await next();
   }
 

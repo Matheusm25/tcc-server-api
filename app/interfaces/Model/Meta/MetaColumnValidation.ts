@@ -1,8 +1,8 @@
 interface MetaColumnValidation {
-  required: boolean;
-  unique: boolean;
+  required?: boolean;
+  unique?: boolean;
   type: string;
-  email: boolean;
+  email?: boolean;
   name: string;
 }
 

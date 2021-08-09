@@ -2,11 +2,6 @@ import MetaColumnValidation from 'App/interfaces/Model/Meta/MetaColumnValidation
 
 export default (): Array<MetaColumnValidation> => [
   {
-    name: 'name',
-    required: true,
-    type: 'string',
-  },
-  {
     name: 'email',
     required: true,
     type: 'string',
@@ -15,16 +10,29 @@ export default (): Array<MetaColumnValidation> => [
   },
   {
     name: 'password',
+    type: 'string',
     required: true,
+  },
+  {
+    name: 'name',
+    type: 'string',
+    required: true,
+  },
+  {
+    name: 'description',
+    type: 'string',
+    required: true,
+  },
+  {
+    name: 'additional_information',
     type: 'string',
   },
   {
-    name: 'birth_date',
-    required: true,
-    type: 'date',
+    name: 'address_id',
+    type: 'string',
   },
   {
-    name: 'address_id',
+    name: 'document',
     type: 'string',
   },
 ];

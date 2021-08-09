@@ -3,28 +3,29 @@ import MetaColumnValidation from 'App/interfaces/Model/Meta/MetaColumnValidation
 export default (): Array<MetaColumnValidation> => [
   {
     name: 'name',
+    type: 'string',
     required: true,
+  },
+  {
+    name: 'description',
     type: 'string',
   },
   {
-    name: 'email',
-    required: true,
-    type: 'string',
-    email: true,
-    unique: true,
-  },
-  {
-    name: 'password',
-    required: true,
+    name: 'image',
     type: 'string',
   },
   {
-    name: 'birth_date',
+    name: 'price',
     required: true,
-    type: 'date',
+    type: 'number',
   },
   {
-    name: 'address_id',
+    name: 'item_category_id',
     type: 'string',
+  },
+  {
+    name: 'truck_id',
+    type: 'string',
+    required: true,
   },
 ];
