@@ -33,5 +33,10 @@ Models.forEach(model => {
     Route.delete(`/${modelName}/:id`, 'DefaultController.destroy').middleware(
       'validator:delete',
     );
-  }).middleware(`setModel:${model}`);
+  })
+    .middleware(`setModel:${model}`)
+    .middleware('auth');
 });
+
+Route.post('/loginByUser', 'AuthController.loginByUser');
+Route.post('/loginByTruck', 'AuthController.loginByTruck');

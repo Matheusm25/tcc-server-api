@@ -1,11 +1,11 @@
-import HttpContextContractWithModel from 'App/interfaces/HttpContext/HttpContextContractWithModel';
+import HttpContextContractExtended from 'App/interfaces/HttpContext/HttpContextContractExtended';
 
 export default class DefaultController {
   public async index({
     response,
     Model,
     request,
-  }: HttpContextContractWithModel) {
+  }: HttpContextContractExtended) {
     try {
       const relationships = request.header('relationships')
         ? JSON.parse(request.header('relationships') || '')
@@ -34,7 +34,7 @@ export default class DefaultController {
     response,
     request,
     Model,
-  }: HttpContextContractWithModel) {
+  }: HttpContextContractExtended) {
     try {
       const relationships = request.header('relationships')
         ? JSON.parse(request.header('relationships') || '')
@@ -62,7 +62,7 @@ export default class DefaultController {
     params,
     request,
     Model,
-  }: HttpContextContractWithModel) {
+  }: HttpContextContractExtended) {
     try {
       const relationships = request.header('relationships')
         ? JSON.parse(request.header('relationships') || '')
@@ -89,7 +89,7 @@ export default class DefaultController {
     params,
     request,
     Model,
-  }: HttpContextContractWithModel) {
+  }: HttpContextContractExtended) {
     try {
       const relationships = request.header('relationships')
         ? JSON.parse(request.header('relationships') || '')
@@ -118,7 +118,7 @@ export default class DefaultController {
     response,
     params,
     Model,
-  }: HttpContextContractWithModel) {
+  }: HttpContextContractExtended) {
     try {
       const { id } = params;
       const entity = await Model.findOrFail(id);

@@ -1,8 +1,8 @@
-import HttpContextContractWithModel from 'App/interfaces/HttpContext/HttpContextContractWithModel';
+import HttpContextContractExtended from 'App/interfaces/HttpContext/HttpContextContractExtended';
 
 export default class SetModel {
   public async handle(
-    ctx: HttpContextContractWithModel,
+    ctx: HttpContextContractExtended,
     next: () => Promise<void>,
     guards?: string[],
   ) {
