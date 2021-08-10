@@ -36,9 +36,21 @@ export default class DefaultController {
     Model,
   }: HttpContextContractWithModel) {
     try {
+      const relationships = request.header('relationships')
+        ? JSON.parse(request.header('relationships') || '')
+        : '';
+
       const newEntity = await Model.create(request.body());
-      return response.status(201).json(newEntity.toJSON());
-      // set Relationshps in afterQuery
+      const modelQuery = Model.query().where({ id: newEntity.id });
+      if (relationships) {
+        relationships.forEach(model => {
+          modelQuery.preload(model);
+        });
+        const entity = await modelQuery.firstOrFail();
+        return response.status(201).json(entity.toJSON());
+      } else {
+        return response.status(201).json(newEntity.toJSON());
+      }
     } catch (err) {
       console.log(err);
       response.status(err.status || 500).json({ message: err.message });
@@ -52,8 +64,19 @@ export default class DefaultController {
     Model,
   }: HttpContextContractWithModel) {
     try {
+      const relationships = request.header('relationships')
+        ? JSON.parse(request.header('relationships') || '')
+        : '';
+
       const { id } = params;
-      const entity = await Model.findOrFail(id);
+      const modelQuery = Model.query().where({ id });
+      if (relationships) {
+        relationships.forEach(model => {
+          modelQuery.preload(model);
+        });
+      }
+
+      const entity = await modelQuery.firstOrFail();
       return response.status(200).json(entity.toJSON());
     } catch (err) {
       console.log(err);
@@ -68,9 +91,19 @@ export default class DefaultController {
     Model,
   }: HttpContextContractWithModel) {
     try {
+      const relationships = request.header('relationships')
+        ? JSON.parse(request.header('relationships') || '')
+        : '';
+
       const { id } = params;
       const args = request.body();
-      const entity = await Model.findOrFail(id);
+      const modelQuery = Model.query().where('id', id);
+      if (relationships) {
+        relationships.forEach(model => {
+          modelQuery.preload(model);
+        });
+      }
+      const entity = await modelQuery.firstOrFail();
       entity.merge(args);
       await entity.save();
 
