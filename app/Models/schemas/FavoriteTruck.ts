@@ -5,10 +5,16 @@ export default (): Array<MetaColumnValidation> => [
     name: 'truck_id',
     type: 'string',
     required: true,
+    exists: {
+      table: 'trucks',
+    },
   },
   {
     name: 'user_id',
     type: 'string',
     required: true,
+    exists: {
+      table: 'users',
+    },
   },
 ];

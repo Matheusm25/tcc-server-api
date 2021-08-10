@@ -8,17 +8,20 @@ export default (): Array<MetaColumnValidation> => [
   },
   {
     name: 'initial_hour',
-    type: 'string',
+    type: 'number',
     required: true,
   },
   {
     name: 'finish_hour',
-    type: 'string',
+    type: 'number',
     required: true,
   },
   {
     name: 'truck_id',
     type: 'string',
     required: true,
+    exists: {
+      table: 'trucks',
+    },
   },
 ];

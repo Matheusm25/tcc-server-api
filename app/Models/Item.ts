@@ -1,4 +1,4 @@
-import { column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
+import { BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm';
 
 import BaseModel from './DefaultModel/BaseModel';
 import ItemCategory from './ItemCategory';
@@ -23,9 +23,9 @@ export default class Item extends BaseModel {
   @column()
   public truck_id: string;
 
-  @hasOne(() => Truck)
-  public truck: HasOne<typeof Truck>;
+  @belongsTo(() => Truck, { foreignKey: 'truck_id' })
+  public truck: BelongsTo<typeof Truck>;
 
-  @hasOne(() => ItemCategory)
-  public itemCategory: HasOne<typeof ItemCategory>;
+  @belongsTo(() => ItemCategory, { foreignKey: 'item_category_id' })
+  public itemCategory: BelongsTo<typeof ItemCategory>;
 }

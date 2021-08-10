@@ -1,4 +1,9 @@
-import { beforeSave, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
+import {
+  beforeSave,
+  BelongsTo,
+  belongsTo,
+  column,
+} from '@ioc:Adonis/Lucid/Orm';
 import Hash from '@ioc:Adonis/Core/Hash';
 
 import BaseModel from './DefaultModel/BaseModel';
@@ -21,8 +26,8 @@ export default class User extends BaseModel {
   @column()
   public address_id: string;
 
-  @hasOne(() => Address)
-  public address: HasOne<typeof Address>;
+  @belongsTo(() => Address, { foreignKey: 'address_id' })
+  public address: BelongsTo<typeof Address>;
 
   @beforeSave()
   public static async hashPassword(user: User) {

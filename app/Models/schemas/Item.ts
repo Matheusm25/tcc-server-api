@@ -22,10 +22,16 @@ export default (): Array<MetaColumnValidation> => [
   {
     name: 'item_category_id',
     type: 'string',
+    exists: {
+      table: 'item_categories',
+    },
   },
   {
     name: 'truck_id',
     type: 'string',
     required: true,
+    exists: {
+      table: 'trucks',
+    },
   },
 ];

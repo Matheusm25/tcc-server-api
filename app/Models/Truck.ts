@@ -1,13 +1,19 @@
-import { column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
+import {
+  beforeSave,
+  BelongsTo,
+  belongsTo,
+  column,
+} from '@ioc:Adonis/Lucid/Orm';
 
 import BaseModel from './DefaultModel/BaseModel';
 import Address from './Address';
+import Hash from '@ioc:Adonis/Core/Hash';
 
 export default class Truck extends BaseModel {
   @column()
   public email: string;
 
-  @column()
+  @column({ serializeAs: null })
   public password: string;
 
   @column()
@@ -25,6 +31,13 @@ export default class Truck extends BaseModel {
   @column()
   public document: string;
 
-  @hasOne(() => Address)
-  public address: HasOne<typeof Address>;
+  @belongsTo(() => Address, { foreignKey: 'address_id' })
+  public address: BelongsTo<typeof Address>;
+
+  @beforeSave()
+  public static async hashPassword(truck: Truck) {
+    if (truck.$dirty.password) {
+      truck.password = await Hash.make(truck.password);
+    }
+  }
 }

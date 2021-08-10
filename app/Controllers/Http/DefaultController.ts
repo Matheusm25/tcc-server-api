@@ -7,8 +7,23 @@ export default class DefaultController {
     request,
   }: HttpContextContractWithModel) {
     try {
-      const entities = await Model.all();
-      return response.status(200).json(entities);
+      const relationships = request.header('relationships')
+        ? JSON.parse(request.header('relationships') || '')
+        : '';
+
+      const modelQuery = Model.query();
+
+      if (relationships) {
+        relationships.forEach(model => {
+          modelQuery.preload(model);
+        });
+
+        const entities = await modelQuery.exec();
+        return response.status(200).json(entities);
+      } else {
+        const entities = await Model.all();
+        return response.status(200).json(entities);
+      }
     } catch (err) {
       console.log(err);
       response.status(err.status || 500).json({ message: err.message });

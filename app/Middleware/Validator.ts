@@ -60,11 +60,15 @@ export default class Validator {
       }
 
       if (attribute.required) {
-        console.log(rulesArray);
-        entityObjectValidator[attribute.name] = schema[attribute.type](
-          {},
-          rulesArray,
-        );
+        try {
+          entityObjectValidator[attribute.name] = schema[attribute.type](
+            {},
+            rulesArray,
+          );
+        } catch {
+          entityObjectValidator[attribute.name] =
+            schema[attribute.type](rulesArray);
+        }
       } else {
         try {
           entityObjectValidator[attribute.name] = schema[
