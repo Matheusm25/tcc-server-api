@@ -11,6 +11,8 @@ import Database from '@ioc:Adonis/Lucid/Database';
 
 import Uuid from '../../services/uuid';
 
+import applyFilter from '../Filters';
+
 export default class DefaultModel extends BaseModel {
   public static tenant = 'none';
 
@@ -60,5 +62,19 @@ export default class DefaultModel extends BaseModel {
     await updatePromise;
 
     await this.constructor.$hooks.exec('after', 'delete', this);
+  }
+
+  public static filter(
+    query,
+    filters,
+  ): ModelQueryBuilderContract<typeof BaseModel> {
+    filters.map(({ field, operation = '=', value }) => {
+      query = applyFilter(query, this, {
+        field,
+        operation,
+        value,
+      });
+    });
+    return query;
   }
 }

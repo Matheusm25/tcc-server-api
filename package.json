@@ -29,6 +29,7 @@
     "@adonisjs/repl": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^1.27.0",
+    "moment": "^2.29.1",
     "node-uuid": "^1.4.8",
     "pg": "^8.6.0",
     "phc-argon2": "^1.1.1",

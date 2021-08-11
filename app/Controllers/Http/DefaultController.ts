@@ -11,19 +11,22 @@ export default class DefaultController {
         ? JSON.parse(request.header('relationships') || '')
         : '';
 
+      const { filters: qsFilters = '[]' } = request.qs();
+
+      const filters = JSON.parse(qsFilters);
+
       const modelQuery = Model.query();
+
+      Model.filter(modelQuery, filters);
 
       if (relationships) {
         relationships.forEach(model => {
           modelQuery.preload(model);
         });
-
-        const entities = await modelQuery.exec();
-        return response.status(200).json(entities);
-      } else {
-        const entities = await Model.all();
-        return response.status(200).json(entities);
       }
+
+      const entities = await modelQuery.exec();
+      return response.status(200).json(entities);
     } catch (err) {
       console.log(err);
       response.status(err.status || 500).json({ message: err.message });
