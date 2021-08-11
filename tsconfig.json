@@ -10,6 +10,7 @@
   "compilerOptions": {
     "outDir": "build",
     "rootDir": "./",
+    "experimentalDecorators": true,
     "sourceMap": true,
     "paths": {
       "App/*": [
