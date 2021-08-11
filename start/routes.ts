@@ -3,16 +3,16 @@ import { string } from '@ioc:Adonis/Core/Helpers';
 import { pluralize } from '@poppinss/utils/build/src/Helpers/string';
 
 const Models = [
-  { model: 'Address', tenant: 'both' },
-  { model: 'FavoriteTruck', tenant: 'User' },
-  { model: 'Item', tenant: 'Truck' },
-  { model: 'ItemCategory', tenant: 'Truck' },
-  { model: 'Schedule', tenant: 'Truck' },
-  { model: 'Truck', tenant: 'none' },
-  { model: 'User', tenant: 'none' },
+  'Address',
+  'FavoriteTruck',
+  'Item',
+  'ItemCategory',
+  'Schedule',
+  'Truck',
+  'User',
 ];
 
-Models.forEach(({ model, tenant }) => {
+Models.forEach(model => {
   const modelName = string.camelCase(model);
 
   Route.group(() => {
@@ -35,7 +35,7 @@ Models.forEach(({ model, tenant }) => {
     );
   })
     .middleware(`setModel:${model}`)
-    .middleware(`auth:${tenant}`);
+    .middleware('auth');
 });
 
 Route.post('/loginByUser', 'AuthController.loginByUser');

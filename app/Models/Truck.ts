@@ -13,6 +13,8 @@ import Hash from '@ioc:Adonis/Core/Hash';
 import Schedule from './Schedule';
 
 export default class Truck extends BaseModel {
+  public static tenant = 'none';
+
   @column()
   public email: string;
 

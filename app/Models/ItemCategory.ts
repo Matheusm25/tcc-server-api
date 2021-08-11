@@ -4,6 +4,8 @@ import BaseModel from './DefaultModel/BaseModel';
 import Truck from './Truck';
 
 export default class ItemCategory extends BaseModel {
+  public static tenant = 'Truck';
+
   @column()
   public name: string;
 

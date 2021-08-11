@@ -12,6 +12,8 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import Uuid from '../../services/uuid';
 
 export default class DefaultModel extends BaseModel {
+  public static tenant = 'none';
+
   @column({ isPrimary: true })
   public id: string;
 

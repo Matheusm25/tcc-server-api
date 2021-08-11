@@ -11,6 +11,8 @@ import { DateTime } from 'luxon';
 import Address from './Address';
 
 export default class User extends BaseModel {
+  public static tenant = 'none';
+
   @column()
   public name: string;
 

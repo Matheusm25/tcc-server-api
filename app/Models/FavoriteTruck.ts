@@ -5,6 +5,8 @@ import Truck from './Truck';
 import User from './User';
 
 export default class FavoriteTruck extends BaseModel {
+  public static tenant = 'User';
+
   @column()
   public truck_id: string;
 
