@@ -6,12 +6,4 @@ export default (): Array<MetaColumnValidation> => [
     required: true,
     type: 'string',
   },
-  {
-    name: 'truck_id',
-    required: true,
-    type: 'string',
-    exists: {
-      table: 'trucks',
-    },
-  },
 ];

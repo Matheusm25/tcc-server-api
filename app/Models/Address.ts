@@ -3,7 +3,7 @@ import { column } from '@ioc:Adonis/Lucid/Orm';
 import BaseModel from './DefaultModel/BaseModel';
 
 export default class Address extends BaseModel {
-  public static tenant = 'both';
+  public static tenant = 'none';
 
   @column()
   public street_name: string;

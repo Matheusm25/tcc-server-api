@@ -34,13 +34,20 @@ export default class DefaultController {
     response,
     request,
     Model,
+    loggedEntity,
   }: HttpContextContractExtended) {
     try {
       const relationships = request.header('relationships')
         ? JSON.parse(request.header('relationships') || '')
         : '';
 
-      const newEntity = await Model.create(request.body());
+      let tenant = {};
+
+      if (Model.tenant !== 'none') {
+        tenant[`${Model.tenant.toLowerCase()}_id`] = loggedEntity?.id;
+      }
+
+      const newEntity = await Model.create({ ...request.body(), ...tenant });
       const modelQuery = Model.query().where({ id: newEntity.id });
       if (relationships) {
         relationships.forEach(model => {
