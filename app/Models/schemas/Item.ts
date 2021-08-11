@@ -27,6 +27,10 @@ export default (): Array<MetaColumnValidation> => [
     },
   },
   {
+    name: 'base64',
+    type: 'string',
+  },
+  {
     name: 'truck_id',
     type: 'string',
     required: true,

@@ -3,11 +3,14 @@ import {
   BelongsTo,
   belongsTo,
   column,
+  HasMany,
+  hasMany,
 } from '@ioc:Adonis/Lucid/Orm';
 
 import BaseModel from './DefaultModel/BaseModel';
 import Address from './Address';
 import Hash from '@ioc:Adonis/Core/Hash';
+import Schedule from './Schedule';
 
 export default class Truck extends BaseModel {
   @column()
@@ -30,6 +33,9 @@ export default class Truck extends BaseModel {
 
   @column()
   public document: string;
+
+  @hasMany(() => Schedule, { foreignKey: 'truck_id' })
+  public schedules: HasMany<typeof Schedule>;
 
   @belongsTo(() => Address, { foreignKey: 'address_id' })
   public address: BelongsTo<typeof Address>;
