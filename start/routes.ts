@@ -38,5 +38,11 @@ Models.forEach(model => {
     .middleware('auth');
 });
 
+Route.get('/', ({ request, response }) => {
+  return response.json({
+    ok: true,
+  });
+});
+
 Route.post('/loginByUser', 'AuthController.loginByUser');
 Route.post('/loginByTruck', 'AuthController.loginByTruck');
