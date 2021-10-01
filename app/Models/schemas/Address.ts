@@ -3,13 +3,11 @@ import MetaColumnValidation from 'App/interfaces/Model/Meta/MetaColumnValidation
 export default (): Array<MetaColumnValidation> => [
   {
     name: 'street_name',
-    required: true,
     type: 'string',
   },
   {
     name: 'street_number',
     type: 'string',
-    required: true,
   },
   {
     name: 'street_add',
@@ -17,13 +15,11 @@ export default (): Array<MetaColumnValidation> => [
   },
   {
     name: 'neighborhood',
-    required: true,
     type: 'string',
   },
   {
     name: 'zipcode',
     type: 'string',
-    required: true,
   },
   {
     name: 'lat',
@@ -36,11 +32,13 @@ export default (): Array<MetaColumnValidation> => [
   {
     name: 'city',
     type: 'string',
-    required: true,
   },
   {
     name: 'state',
     type: 'string',
-    required: true,
+  },
+  {
+    name: 'additional_information',
+    type: 'string',
   },
 ];

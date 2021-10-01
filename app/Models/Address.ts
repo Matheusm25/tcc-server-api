@@ -31,4 +31,7 @@ export default class Address extends BaseModel {
 
   @column()
   public state: string;
+
+  @column()
+  public additional_information: string;
 }
