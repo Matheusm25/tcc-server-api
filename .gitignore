@@ -5,3 +5,6 @@ coverage
 .DS_STORE
 .env
 tmp
+npm-debug.log
+.DS_Store
+/*.env
