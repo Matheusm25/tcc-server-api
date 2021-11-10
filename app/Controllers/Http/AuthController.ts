@@ -21,7 +21,7 @@ export default class AuthController {
           { ...user.toJSON(), entity: 'User' },
           Env.get('APP_KEY'),
         );
-        return response.status(200).json({ token });
+        return response.status(200).json({ token, user });
       } else {
         throw new Error('invalid password');
       }
@@ -45,7 +45,7 @@ export default class AuthController {
           { ...truck.toJSON(), entity: 'Truck' },
           Env.get('APP_KEY'),
         );
-        return response.status(200).json({ token });
+        return response.status(200).json({ token, truck });
       } else {
         throw new Error('invalid password');
       }
